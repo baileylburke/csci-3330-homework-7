@@ -59,7 +59,7 @@
 
             <div class="dashboard-grid">
                 <div>
-                    <section class="panel">
+                    <section class="panel" id="reports-panel">
                         <div id="dashboardTabs">
                             <ul>
                                 <li><a href="#tab-overview">Overview</a></li>
@@ -73,6 +73,7 @@
 
                             <div id="tab-sales">
                                 <h3>Sales Summary</h3>
+                                <div class="table-scroll">
                                 <table id="salesTable">
                                     <thead>
                                         <tr>
@@ -95,6 +96,7 @@
                                         <% } %>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
 
                         </div>
@@ -102,8 +104,9 @@
                     </section>
 
 
-                    <section class="panel">
+                    <section class="panel" id="customers-panel">
                         <h2>Customers</h2>
+                        <div class="table-scroll">
                         <table id="customerTable">
                             <thead>
                                 <tr>
@@ -128,6 +131,31 @@
                                 <% } %>
                             </tbody>
                         </table>
+                        </div>
+                        <nav class="pagination" aria-label="Customer pages">
+                            <% if (page > 1) { %>
+                                <a href="/?page=1#customers-panel">First</a>
+                                <a href="/?page=<%= page - 1 %>#customers-panel" rel="prev">Previous</a>
+                            <% } else { %>
+                                <span class="disabled" aria-disabled="true">First</span>
+                                <span class="disabled" aria-disabled="true">Previous</span>
+                            <% } %>
+                            <% for (let current = Math.max(1, page - 2); current <= Math.min(totalPages, page + 2); current++) { %>
+                                <% if (current === page) { %>
+                                    <span class="active" aria-current="page"><%= current %></span>
+                                <% } else { %>
+                                    <a href="/?page=<%= current %>#customers-panel"><%= current %></a>
+                                <% } %>
+                            <% } %>
+                            <% if (page < totalPages) { %>
+                                <a href="/?page=<%= page + 1 %>#customers-panel" rel="next">Next</a>
+                                <a href="/?page=<%= totalPages %>#customers-panel">Last</a>
+                            <% } else { %>
+                                <span class="disabled" aria-disabled="true">Next</span>
+                                <span class="disabled" aria-disabled="true">Last</span>
+                            <% } %>
+                        </nav>
+                        <p class="page-summary">Page <%= page %> of <%= totalPages %> · <%= number(customerCount) %> customers</p>
                     </section>
                 </div>
 

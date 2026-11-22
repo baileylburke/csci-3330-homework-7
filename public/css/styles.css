@@ -104,7 +104,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0,0,0,.08);
     margin-bottom: 20px;
-    
+
 }
 
 .panel h2 {
@@ -160,47 +160,100 @@ th {
     padding: 8px;
 }
 
-/* pagination */
-
-body {
-    font-family: Arial;
-    margin: 40px;
+.table-scroll {
+    overflow-x: auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background: #eee;
+.content,
+.dashboard-grid > div {
+    min-width: 0;
 }
 
 .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-top: 20px;
 }
 
-.pagination a {
-    padding: 8px 14px;
-    margin: 3px;
+.pagination a,
+.pagination span {
+    padding: 8px 12px;
     text-decoration: none;
     background: #eee;
-    color: black;
+    color: #222;
     border-radius: 4px;
 }
 
-.pagination a.active {
-    background: #007bff;
+.pagination .active {
+    background: #1565c0;
     color: white;
 }
 
-.pagination a.disabled {
-    pointer-events: none;
-    opacity: 0.4;
+.pagination .disabled {
+    color: #666;
+    background: #f5f5f5;
+}
+
+.page-summary {
+    color: #666;
+    font-size: 14px;
+}
+
+#customerDialog {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .header {
+        height: auto;
+        min-height: 60px;
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .dashboard {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .sidebar button {
+        margin: 0;
+    }
+
+    .content {
+        padding: 12px;
+    }
+
+    .stats {
+        gap: 12px;
+    }
+
+    .card,
+    .panel {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        overflow-wrap: anywhere;
+    }
 }
